@@ -92,7 +92,7 @@ export class AudioService {
     this.audioObj.currentTime = seconds;
   }
 
-  formatTime(time: number, format: string = "HH:mm:ss") {
+  static formatTime(time: number, format: string = "HH:mm:ss") {
     const momentTime = time * 1000;
     return moment.utc(momentTime).format(format);
   }
@@ -101,7 +101,7 @@ export class AudioService {
     switch (event.type) {
       case "canplay":
         this.state.duration = this.audioObj.duration;
-        this.state.readableDuration = this.formatTime(this.state.duration);
+        this.state.readableDuration = AudioService.formatTime(this.state.duration);
         this.state.canplay = true;
         break;
       case "playing":
@@ -112,7 +112,7 @@ export class AudioService {
         break;
       case "timeupdate":
         this.state.currentTime = this.audioObj.currentTime;
-        this.state.readableCurrentTime = this.formatTime(
+        this.state.readableCurrentTime = AudioService.formatTime(
           this.state.currentTime
         );
         break;
